@@ -9,51 +9,57 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Color(.purple)
-                .ignoresSafeArea()
-            VStack {
-                Text("Fruit Finder App")
-                    .padding()
-                NavigationLink(destination: gameplayview()) {
-                    Text("Play!")
-                        .padding()
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-                }
-                NavigationLink(destination: leaderboardview()) {
-                    Text("Leaderboard")
-                        .padding()
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-                }
-                NavigationLink(destination: fruitfactview()) {
-                    Text("Fruit Facts")
-                        .padding()
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-                }
-                NavigationLink(destination: aboutview()) {
-                    Text("About")
-                        .padding()
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-                }
+        NavigationView {
+            ZStack {
+                Color(.purple)
+                    .ignoresSafeArea()
                 
+                VStack {
+                    Text("Fruit finder")
+                        .padding()
+                    
+                    NavigationLink(destination: gameplayview()) {
+                        Text("Play!")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .cornerRadius(10)
+                            .padding(.bottom, 10)
+                    }
+                    
+                    NavigationLink(destination: leaderboardview()) {
+                        Text("Leaderboard")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .cornerRadius(10)
+                            .padding(.bottom, 10)
+                    }
+                    
+                    NavigationLink(destination: fruitfactview()) {
+                        Text("Fruit Facts")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .cornerRadius(10)
+                            .padding(.bottom, 10)
+                    }
+                    
+                    NavigationLink(destination: aboutview()) {
+                        Text("About")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .cornerRadius(10)
+                            .padding(.bottom, 10)
+                    }
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }

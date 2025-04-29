@@ -48,7 +48,6 @@ struct gameplayview: View {
         }
     }
 }
-
-#Preview {
+ #Preview {
     gameplayview()
 }

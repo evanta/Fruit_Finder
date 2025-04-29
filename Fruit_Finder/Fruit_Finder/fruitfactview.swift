@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct fruitfactview: View {
+    @State private var fruitimage = "Banana"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(.purple)
+                .ignoresSafeArea()
+            
+            VStack {
+                Image(fruitimage)
+                    .resizable()
+            }
+        }
     }
 }
 

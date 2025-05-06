@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+//change this var name to whatever the name of the winning friut is.
+//the name has to be the same as the name of the of the image.
+class GameWinner: ObservableObject {
+    @Published var name = "Tomato"
+}
+
 struct gameplayview: View {
     @State private var fruit1:String = "Banana"
     @State private var fruit2:String = "Blackberry"
@@ -14,6 +20,8 @@ struct gameplayview: View {
     @State private var fruit4:String = "Fig"
     @State private var fruit5:String = "Gooseberry"
     @State private var fruit6:String = "GreenApple"
+    @StateObject var winner = GameWinner()
+
 
 
     var body: some View {

@@ -39,10 +39,10 @@ struct Nutrition: Decodable {
 }
 
 struct fruitfactview: View {
+    @StateObject var winner = GameWinner()
     @State private var fruitimage = "Banana"
     @State private var fruittext = "this is a banana."
-    @State private var fruit: fruity?
-    @State private var fruitName = "Blackberry"
+    @State private var fruit: fruity?    
     
     var body: some View {
         ZStack {
@@ -81,7 +81,7 @@ struct fruitfactview: View {
 
 func fetchCryptoData() async {
     // Corrected URL with "https://"
-    guard let url = URL(string: "https://www.fruityvice.com/api/fruit/\(fruitName)") else {
+    guard let url = URL(string: "https://www.fruityvice.com/api/fruit/\(winner.name)") else {
         print("Invalid URL")
         return
     }

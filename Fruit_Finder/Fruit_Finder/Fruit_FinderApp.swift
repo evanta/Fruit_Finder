@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Fruit_FinderApp: App {
+    @StateObject private var winner = GameWinner()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(winner)
         }
     }
 }

@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-//change this var name to whatever the name of the winning friut is.
+//change the GameWinner object.name to whatever the name of the winning friut is.
 //the name has to be the same as the name of the of the image.
 class GameWinner: ObservableObject {
-    @Published var name = "Tomato"
+    @Published var name: String = ""
 }
 
 struct gameplayview: View {
@@ -20,8 +20,7 @@ struct gameplayview: View {
     @State private var fruit4:String = "Fig"
     @State private var fruit5:String = "Gooseberry"
     @State private var fruit6:String = "GreenApple"
-    @StateObject var winner = GameWinner()
-
+    @EnvironmentObject var winner: GameWinner
 
 
     var body: some View {
@@ -30,12 +29,23 @@ struct gameplayview: View {
                 .ignoresSafeArea()
             VStack {
                 HStack {
-                    Image(fruit1)
-                        .resizable()
+                    //Fruit image as a button. when you press the button, it updates winner name.
+                    //winner name should be the name of the fruit that the play matched correctly.
+                    //This is just an example of how you can update winner.name with a button.
+                    Button {action: do {
+                        winner.name = "Banana"
+                    }} label: {
+                        Image(fruit1)
+                            .resizable()
+                    }
                     
-                    Image(fruit2)
-                        .resizable()
-                } // end HStack
+                    //This is just an example of how you can update winner.name with a button.
+                    Button {action: do {
+                        winner.name = "Blackberry"
+                    }} label: {
+                        Image(fruit2)
+                            .resizable()
+                    }                } // end HStack
                 
                 HStack {
                     Image(fruit3)
@@ -53,10 +63,13 @@ struct gameplayview: View {
                 } // end HStack
             }
             .padding()
+            
+            
         }
     }
 }
 
 #Preview {
     gameplayview()
+        .environmentObject(GameWinner())
 }

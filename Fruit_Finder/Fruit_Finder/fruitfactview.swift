@@ -7,19 +7,6 @@
 
 import SwiftUI
 import Foundation
-/*
- "name": "Persimmon",
-   "id": 52,
-   "family": "Ebenaceae",
-   "order": "Rosales",
-   "genus": "Diospyros",
-   "nutritions": {
-     "calories": 81,
-     "fat": 0,
-     "sugar": 18,
-     "carbohydrates": 18,
-     "protein": 0
- */
 
 struct fruity: Decodable {
     var name: String
@@ -39,7 +26,7 @@ struct Nutrition: Decodable {
 }
 
 struct fruitfactview: View {
-    @StateObject var winner = GameWinner()
+    @EnvironmentObject var winner: GameWinner
     @State private var fruitimage = "Banana"
     @State private var fruittext = "this is a banana."
     @State private var fruit: fruity?    
@@ -72,8 +59,11 @@ struct fruitfactview: View {
                     .foregroundColor(Color.black)
                     .font(.custom("helvetica", size: 12))
             }
-            .task {
-                await fetchCryptoData()
+            .task(id: winner.name) {
+                if !winner.name.isEmpty {
+                    fruitimage = winner.name
+                    await fetchCryptoData()
+                }
             }
 
         }
@@ -92,6 +82,7 @@ func fetchCryptoData() async {
         // Decode JSON correctly using CryptoResponse
         if let decodedResponse = try? JSONDecoder().decode(fruity.self, from: data) {
             print(decodedResponse)
+            print("name in the api: ", winner.name)
             DispatchQueue.main.async {
                 self.fruit = decodedResponse
             }
@@ -107,4 +98,5 @@ func fetchCryptoData() async {
 
 #Preview {
     fruitfactview()
+        .environmentObject(GameWinner())
 }

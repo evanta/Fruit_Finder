@@ -8,7 +8,7 @@
 import SwiftUI
 import Foundation
 
-struct fruity: Decodable {
+struct fruityJson: Decodable {
     var name: String
     var id: Int
     var family: String
@@ -29,7 +29,7 @@ struct fruitfactview: View {
     @EnvironmentObject var winner: GameWinner
     @State private var fruitimage = "Banana"
     @State private var fruittext = "this is a banana."
-    @State private var fruit: fruity?    
+    @State private var fruit: fruityJson?
     
     var body: some View {
         ZStack {
@@ -37,7 +37,7 @@ struct fruitfactview: View {
                 .ignoresSafeArea()
             
             VStack {
-                Image(fruitimage)
+                Image(winner.name)
                     .resizable()
                     .padding()
                 Text(fruit.map {
@@ -80,7 +80,7 @@ func fetchCryptoData() async {
         let (data, _) = try await URLSession.shared.data(from: url)
 
         // Decode JSON correctly using CryptoResponse
-        if let decodedResponse = try? JSONDecoder().decode(fruity.self, from: data) {
+        if let decodedResponse = try? JSONDecoder().decode(fruityJson.self, from: data) {
             print(decodedResponse)
             print("name in the api: ", winner.name)
             DispatchQueue.main.async {

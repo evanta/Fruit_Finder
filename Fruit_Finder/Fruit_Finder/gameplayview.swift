@@ -14,6 +14,7 @@ class GameWinner: ObservableObject {
 }
 
 struct gameplayview: View {
+    
     @State private var fruit1:String = "Banana"
     @State private var fruit2:String = "Blackberry"
     @State private var fruit3:String = "Durian"
@@ -21,9 +22,54 @@ struct gameplayview: View {
     @State private var fruit5:String = "Gooseberry"
     @State private var fruit6:String = "GreenApple"
     @EnvironmentObject var winner: GameWinner
-
+    @State private var ScoreCount:Int = 0
+    @State private var MissCount:Int = 0
+    @State private var GameOver:Bool = false
+    @State private var SelectedFruitArray: Array<String?> = Array(repeating: nil, count: 2)
+    @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
 
     var body: some View {
+        Button(action: {
+            
+            var randomNumber:Int = 0
+            for i in 1...6 {
+                
+                if i == 1 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit1 = RandomFruitList[randomNumber-1]
+                }
+                else if i == 2 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit2 = RandomFruitList[randomNumber-1]
+                }
+                else if i == 3 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit3 = RandomFruitList[randomNumber-1]
+                }
+                else if i == 4 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit4 = RandomFruitList[randomNumber-1]
+                }
+                else if i == 5 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit5 = RandomFruitList[randomNumber-1]
+                }
+                else if i == 6 {
+                    randomNumber = Int.random(in: 1...17)
+                    fruit6 = RandomFruitList[randomNumber-1]
+                }
+                
+                
+                
+            } // end for loop
+        }, label: {
+            Text("START!")
+                .padding()
+                .foregroundColor(Color.green)
+                .font(.largeTitle)
+            
+        })
+        
         ZStack{
             Color(.purple)
                 .ignoresSafeArea()
@@ -33,7 +79,7 @@ struct gameplayview: View {
                     //winner name should be the name of the fruit that the play matched correctly.
                     //This is just an example of how you can update winner.name with a button.
                     Button {action: do {
-                        winner.name = "Banana"
+                        winner.name = (fruit1)
                     }} label: {
                         Image(fruit1)
                             .resizable()
@@ -41,7 +87,7 @@ struct gameplayview: View {
                     
                     //This is just an example of how you can update winner.name with a button.
                     Button {action: do {
-                        winner.name = "Blackberry"
+                        winner.name = (fruit2)
                     }} label: {
                         Image(fruit2)
                             .resizable()
@@ -69,7 +115,8 @@ struct gameplayview: View {
     }
 }
 
-#Preview {
-    gameplayview()
-        .environmentObject(GameWinner())
+struct gameplayview_Previews: PreviewProvider {
+    static var previews: some View {
+        gameplayview()
+    }
 }

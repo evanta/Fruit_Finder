@@ -17,6 +17,7 @@ struct ContentView: View {
                 VStack {
                     Text("Fruit finder")
                         .padding()
+                        .font(.system(size: 45))
                     
                     NavigationLink(destination: gameplayview()) {
                         Text("Play!")

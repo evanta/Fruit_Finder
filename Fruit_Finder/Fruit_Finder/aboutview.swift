@@ -13,6 +13,8 @@ struct aboutview: View {
     }
 }
 
-#Preview {
-    aboutview()
+struct aboutview_Previews: PreviewProvider {
+    static var previews: some View {
+        aboutview()
+    }
 }

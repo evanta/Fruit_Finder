@@ -25,98 +25,158 @@ struct gameplayview: View {
     @State private var ScoreCount:Int = 0
     @State private var MissCount:Int = 0
     @State private var GameOver:Bool = false
-    @State private var SelectedFruitArray: Array<String?> = Array(repeating: nil, count: 2)
+    @State private var GameStarted:Bool = false
+    @State private var SelectedFruits = Set<String>()
+    
     @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
-
+    
     var body: some View {
-        Button(action: {
-            
-            var randomNumber:Int = 0
-            for i in 1...6 {
-                
-                if i == 1 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit1 = RandomFruitList[randomNumber-1]
-                }
-                else if i == 2 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit2 = RandomFruitList[randomNumber-1]
-                }
-                else if i == 3 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit3 = RandomFruitList[randomNumber-1]
-                }
-                else if i == 4 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit4 = RandomFruitList[randomNumber-1]
-                }
-                else if i == 5 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit5 = RandomFruitList[randomNumber-1]
-                }
-                else if i == 6 {
-                    randomNumber = Int.random(in: 1...17)
-                    fruit6 = RandomFruitList[randomNumber-1]
-                }
-                
-                
-                
-            } // end for loop
-        }, label: {
-            Text("START!")
-                .padding()
-                .foregroundColor(Color.green)
-                .font(.largeTitle)
-            
-        })
+        
         
         ZStack{
-            Color(.purple)
+            Image("Background")
+                .resizable()
                 .ignoresSafeArea()
+            
+            if !GameStarted {
+                Button(action: {
+                    GameStarted = true
+                    var randomNumber:Int = 0
+                    for i in 1...6 {
+                        
+                        if i == 1 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit1 = RandomFruitList[randomNumber-1]
+                        }
+                        else if i == 2 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit2 = RandomFruitList[randomNumber-1]
+                        }
+                        else if i == 3 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit3 = RandomFruitList[randomNumber-1]
+                        }
+                        else if i == 4 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit4 = RandomFruitList[randomNumber-1]
+                        }
+                        else if i == 5 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit5 = RandomFruitList[randomNumber-1]
+                        }
+                        else if i == 6 {
+                            randomNumber = Int.random(in: 1...17)
+                            fruit6 = RandomFruitList[randomNumber-1]
+                        }
+                        
+                        
+                        
+                    } // end for loop
+                })  {
+                    Image("Start")
+                        .resizable()
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                }
+            }
+            
+            
             VStack {
-                HStack {
-                    //Fruit image as a button. when you press the button, it updates winner name.
-                    //winner name should be the name of the fruit that the play matched correctly.
-                    //This is just an example of how you can update winner.name with a button.
-                    Button {action: do {
-                        winner.name = (fruit1)
-                    }} label: {
+                
+                if GameStarted {
+                    Text("Score: \(ScoreCount)  Misses: \(MissCount)")
+                        .font(.headline)
+                        .foregroundColor(Color.green)
+                        .background(Color.purple)
+                        .padding()
+                    
+                    HStack {
+                        //Fruit image as a button. when you press the button, it updates winner name.
+                        //winner name should be the name of the fruit that the play matched correctly.
+                        //This is just an example of how you can update winner.name with a button.
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit1)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        SelectedFruits.removeAll()  // Clear selection after delay
+                                    }
+                                }
+                            }
+                            
+                        }
+                    label: {
                         Image(fruit1)
                             .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
                     }
+                        
+                        
+                        //This is just an example of how you can update winner.name with a button.
+                        Button {action: do {
+                            winner.name = (fruit2)
+                        }} label: {
+                            Image(fruit2)
+                                .resizable()
+                                .shadow(radius: 5)
+                        }                } // end HStack
                     
-                    //This is just an example of how you can update winner.name with a button.
-                    Button {action: do {
-                        winner.name = (fruit2)
-                    }} label: {
-                        Image(fruit2)
-                            .resizable()
-                    }                } // end HStack
+                    HStack {
+                        Button {action: do {
+                            winner.name = (fruit3)
+                        }} label: {
+                            Image(fruit3)
+                                .resizable()
+                                .shadow(radius: 5)
+                        }
+                        
+                        //This is just an example of how you can update winner.name with a button.
+                        Button {action: do {
+                            winner.name = (fruit4)
+                        }} label: {
+                            Image(fruit4)
+                                .resizable()
+                                .shadow(radius: 5)
+                        }                }
+                    HStack {
+                        Button {action: do {
+                            winner.name = (fruit5)
+                        }} label: {
+                            Image(fruit5)
+                                .resizable()
+                                .shadow(radius: 5)
+                        }
+                        
+                        //This is just an example of how you can update winner.name with a button.
+                        Button {action: do {
+                            winner.name = (fruit6)
+                        }} label: {
+                            Image(fruit6)
+                                .resizable()
+                                .shadow(radius: 5)
+                        }                }
+                }
                 
-                HStack {
-                    Image(fruit3)
-                        .resizable()
-                    
-                    Image(fruit4)
-                        .resizable()
-                } // end HStack
-                HStack {
-                    Image(fruit5)
-                        .resizable()
-                    
-                    Image(fruit6)
-                        .resizable()
-                } // end HStack
+                
+                
             }
-            .padding()
-            
-            
         }
     }
-}
-
-struct gameplayview_Previews: PreviewProvider {
-    static var previews: some View {
-        gameplayview()
+    
+    struct gameplayview_Previews: PreviewProvider {
+        static var previews: some View {
+            gameplayview()
+        }
     }
+    
+    
 }

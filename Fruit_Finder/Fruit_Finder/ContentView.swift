@@ -11,13 +11,25 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.purple)
+                Image("Background")
+                    .resizable()
                     .ignoresSafeArea()
                 
+                Image("TitleBG")
+                    .resizable()
+                    .ignoresSafeArea()
+                    
+                
+                
+                
                 VStack {
-                    Text("Fruit finder")
+                    Image("Title")
+                        .resizable()
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding()
-                        .font(.system(size: 45))
+                    
+                            
+                        
                     
                     NavigationLink(destination: gameplayview()) {
                         Text("Play!")
@@ -65,6 +77,8 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

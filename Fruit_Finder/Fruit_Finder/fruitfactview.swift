@@ -96,7 +96,9 @@ func fetchCryptoData() async {
 }
 }
 
-#Preview {
-    fruitfactview()
-        .environmentObject(GameWinner())
+struct fruitfactview_Previews: PreviewProvider {
+    static var previews: some View {
+        fruitfactview()
+            .environmentObject(GameWinner())
+    }
 }

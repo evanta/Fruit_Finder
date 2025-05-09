@@ -34,40 +34,31 @@ struct gameplayview: View {
     
     @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
     
-    func ShuffleFruit(){
-        var randomNumber:Int = 0
-        for i in 1...6 {
-            
-            if i == 1 {
-                randomNumber = Int.random(in: 1...17)
-                fruit1 = RandomFruitList[randomNumber-1]
-            }
-            else if i == 2 {
-                randomNumber = Int.random(in: 1...17)
-                fruit2 = RandomFruitList[randomNumber-1]
-            }
-            else if i == 3 {
-                randomNumber = Int.random(in: 1...17)
-                fruit3 = RandomFruitList[randomNumber-1]
-            }
-            else if i == 4 {
-                randomNumber = Int.random(in: 1...17)
-                fruit4 = RandomFruitList[randomNumber-1]
-            }
-            else if i == 5 {
-                randomNumber = Int.random(in: 1...17)
-                fruit5 = RandomFruitList[randomNumber-1]
-            }
-            else if i == 6 {
-                randomNumber = Int.random(in: 1...17)
-                fruit6 = RandomFruitList[randomNumber-1]
-            }
-            
-            
-            
-        } // end for loop
-
+    func ShuffleFruit() {
+        // Shuffle the full list of possible fruits
+        var shuffledFruits = RandomFruitList.shuffled()
+        
+        // Choose one fruit to duplicate (the matching pair)
+        guard let guaranteedPair = shuffledFruits.popLast() else { return }
+        
+        // Take 4 more unique fruits to fill the rest
+        let otherFruits = Array(shuffledFruits.prefix(4))
+        
+        // Combine into the selection of 6 fruits with exactly one guaranteed pair
+        var selectedFruits = otherFruits + [guaranteedPair, guaranteedPair]
+        
+        // Shuffle final fruit list so the pair isn't predictable
+        selectedFruits.shuffle()
+        
+        // Assign to fruit state variables
+        fruit1 = selectedFruits[0]
+        fruit2 = selectedFruits[1]
+        fruit3 = selectedFruits[2]
+        fruit4 = selectedFruits[3]
+        fruit5 = selectedFruits[4]
+        fruit6 = selectedFruits[5]
     }
+
     var body: some View {
         
         

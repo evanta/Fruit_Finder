@@ -26,7 +26,7 @@ struct gameplayview: View {
     @State private var MissCount:Int = 0
     @State private var GameOver:Bool = false
     @State private var GameStarted:Bool = false
-    @State private var SelectedFruits = Set<String>()
+    @State private var SelectedFruits: [String] = []
     
     @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
     
@@ -130,7 +130,7 @@ struct gameplayview: View {
                         //This is just an example of how you can update winner.name with a button.
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit1)
+                                SelectedFruits.append(fruit1)
                             }
                             else if SelectedFruits.count >= 2 {
                                 let selectedArray = Array(SelectedFruits)
@@ -158,7 +158,7 @@ struct gameplayview: View {
                         //This is just an example of how you can update winner.name with a button.
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit2)
+                                SelectedFruits.append(fruit2)
                             }
                             else if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
@@ -186,7 +186,7 @@ struct gameplayview: View {
                     HStack {
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit3)
+                                SelectedFruits.append(fruit3)
                             }
                             else if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
@@ -214,7 +214,7 @@ struct gameplayview: View {
                         //This is just an example of how you can update winner.name with a button.
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit4)
+                                SelectedFruits.append(fruit4)
                             }
                             else if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
@@ -241,7 +241,7 @@ struct gameplayview: View {
                     HStack {
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit5)
+                                SelectedFruits.append(fruit5)
                             }
                             else if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
@@ -269,7 +269,7 @@ struct gameplayview: View {
                         //This is just an example of how you can update winner.name with a button.
                         Button {
                             if SelectedFruits.count < 2 {
-                                SelectedFruits.insert(fruit6)
+                                SelectedFruits.append(fruit6)
                             }
                             else if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)

@@ -127,7 +127,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit1)
                             }
-                            else if SelectedFruits.count >= 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
@@ -161,7 +161,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit2)
                             }
-                            else if SelectedFruits.count == 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
@@ -195,7 +195,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit3)
                             }
-                            else if SelectedFruits.count == 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
@@ -229,7 +229,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit4)
                             }
-                            else if SelectedFruits.count == 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
@@ -262,7 +262,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit5)
                             }
-                            else if SelectedFruits.count == 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
@@ -296,7 +296,7 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.append(fruit6)
                             }
-                            else if SelectedFruits.count == 2 {
+                            if SelectedFruits.count == 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1

@@ -30,6 +30,40 @@ struct gameplayview: View {
     
     @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
     
+    func ShuffleFruit(){
+        var randomNumber:Int = 0
+        for i in 1...6 {
+            
+            if i == 1 {
+                randomNumber = Int.random(in: 1...17)
+                fruit1 = RandomFruitList[randomNumber-1]
+            }
+            else if i == 2 {
+                randomNumber = Int.random(in: 1...17)
+                fruit2 = RandomFruitList[randomNumber-1]
+            }
+            else if i == 3 {
+                randomNumber = Int.random(in: 1...17)
+                fruit3 = RandomFruitList[randomNumber-1]
+            }
+            else if i == 4 {
+                randomNumber = Int.random(in: 1...17)
+                fruit4 = RandomFruitList[randomNumber-1]
+            }
+            else if i == 5 {
+                randomNumber = Int.random(in: 1...17)
+                fruit5 = RandomFruitList[randomNumber-1]
+            }
+            else if i == 6 {
+                randomNumber = Int.random(in: 1...17)
+                fruit6 = RandomFruitList[randomNumber-1]
+            }
+            
+            
+            
+        } // end for loop
+
+    }
     var body: some View {
         
         
@@ -98,17 +132,17 @@ struct gameplayview: View {
                             if SelectedFruits.count < 2 {
                                 SelectedFruits.insert(fruit1)
                             }
-                            else if SelectedFruits.count == 2 {
+                            else if SelectedFruits.count >= 2 {
                                 let selectedArray = Array(SelectedFruits)
                                 if selectedArray[0] == selectedArray[1]{
                                     ScoreCount += 1
                                     SelectedFruits.removeAll()
+                                    ShuffleFruit()
                                     
                                 } else{
                                     MissCount += 1
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        SelectedFruits.removeAll()  // Clear selection after delay
-                                    }
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
                                 }
                             }
                             
@@ -122,51 +156,146 @@ struct gameplayview: View {
                         
                         
                         //This is just an example of how you can update winner.name with a button.
-                        Button {action: do {
-                            winner.name = (fruit2)
-                        }} label: {
-                            Image(fruit2)
-                                .resizable()
-                                .shadow(radius: 5)
-                        }                } // end HStack
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit2)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                
+                                }
+                            }
+                            
+                        }
+                    label: {
+                        Image(fruit2)
+                            .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
+                    }                } // end HStack
                     
                     HStack {
-                        Button {action: do {
-                            winner.name = (fruit3)
-                        }} label: {
-                            Image(fruit3)
-                                .resizable()
-                                .shadow(radius: 5)
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit3)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                }
+                                }
+                            
+                            
                         }
+                    label: {
+                        Image(fruit3)
+                            .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
+                    }
                         
                         //This is just an example of how you can update winner.name with a button.
-                        Button {action: do {
-                            winner.name = (fruit4)
-                        }} label: {
-                            Image(fruit4)
-                                .resizable()
-                                .shadow(radius: 5)
-                        }                }
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit4)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                
+                                }
+                            }
+                            
+                        }
+                    label: {
+                        Image(fruit4)
+                            .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
+                    }               }
                     HStack {
-                        Button {action: do {
-                            winner.name = (fruit5)
-                        }} label: {
-                            Image(fruit5)
-                                .resizable()
-                                .shadow(radius: 5)
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit5)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                }
+                                
+                            }
+                            
                         }
+                    label: {
+                        Image(fruit5)
+                            .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
+                    }
                         
                         //This is just an example of how you can update winner.name with a button.
-                        Button {action: do {
-                            winner.name = (fruit6)
-                        }} label: {
-                            Image(fruit6)
-                                .resizable()
-                                .shadow(radius: 5)
-                        }                }
+                        Button {
+                            if SelectedFruits.count < 2 {
+                                SelectedFruits.insert(fruit6)
+                            }
+                            else if SelectedFruits.count == 2 {
+                                let selectedArray = Array(SelectedFruits)
+                                if selectedArray[0] == selectedArray[1]{
+                                    ScoreCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                    
+                                } else{
+                                    MissCount += 1
+                                    SelectedFruits.removeAll()
+                                    ShuffleFruit()
+                                }
+                                
+                            }
+                            
+                        }
+                    label: {
+                        Image(fruit6)
+                            .resizable()
+                            .shadow(radius: 5)
+                        // Enlarge when selected
+                    }
+                    }
+                    
                 }
-                
-                
                 
             }
         }

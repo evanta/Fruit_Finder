@@ -37,7 +37,7 @@ struct fruitfactview: View {
                 .ignoresSafeArea()
             
             VStack {
-                Image(winner.name)
+                Image(fruitimage)
                     .resizable()
                     .padding()
                 Text(fruit.map {
@@ -64,6 +64,7 @@ struct fruitfactview: View {
                     fruitimage = winner.name
                     await fetchCryptoData()
                 }
+                //winner.name = "Banana"
             }
 
         }
@@ -96,9 +97,7 @@ func fetchCryptoData() async {
 }
 }
 
-struct fruitfactview_Previews: PreviewProvider {
-    static var previews: some View {
-        fruitfactview()
-            .environmentObject(GameWinner())
-    }
+#Preview {
+    fruitfactview()
+        .environmentObject(GameWinner())
 }

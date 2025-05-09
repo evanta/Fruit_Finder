@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("Background")
+                Image("BackGround")
                     .resizable()
                     .ignoresSafeArea()
                 

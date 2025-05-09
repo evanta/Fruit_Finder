@@ -68,7 +68,7 @@ struct gameplayview: View {
         
         
         ZStack{
-            Image("Background")
+            Image("BackGround")
                 .resizable()
                 .ignoresSafeArea()
             
@@ -300,12 +300,8 @@ struct gameplayview: View {
             }
         }
     }
-    
-    struct gameplayview_Previews: PreviewProvider {
-        static var previews: some View {
-            gameplayview()
-        }
-    }
-    
-    
+}
+#Preview {
+    gameplayview()
+        .environmentObject(GameWinner())
 }

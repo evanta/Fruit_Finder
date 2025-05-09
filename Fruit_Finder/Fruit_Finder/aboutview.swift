@@ -11,7 +11,7 @@ struct aboutview: View {
     var body: some View {
         ZStack{
             
-            Image("Background")
+            Image("BackGround")
                 .resizable()
                 .ignoresSafeArea()
             

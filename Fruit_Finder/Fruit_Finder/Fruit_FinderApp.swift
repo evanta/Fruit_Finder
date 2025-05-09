@@ -5,12 +5,16 @@
 //  Created by Evan Taylor on 4/28/25.
 //
 
+
+//PLEASE DON'T CHANGE ANYTHING IN THIS SECTION WITHOUT RUNNING IN THE XCODE SIMULATOR
 import SwiftUI
 
 @main
 struct Fruit_FinderApp: App {
     @StateObject private var winner = GameWinner()
 
+//PLEASE DON'T CHANGE ANYTHING IN THIS SECTION WITHOUT RUNNING IN THE XCODE SIMULATOR
+    // the .environmentObject(winner) is very important. do not change
     var body: some Scene {
         WindowGroup {
             ContentView()

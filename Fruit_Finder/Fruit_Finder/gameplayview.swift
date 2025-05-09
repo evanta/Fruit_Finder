@@ -301,6 +301,9 @@ struct gameplayview: View {
         }
     }
 }
+
+//do not change this #Preview section. It breaks the preview on xcode.
+//Our Profs code is not directly transferable
 #Preview {
     gameplayview()
         .environmentObject(GameWinner())

@@ -9,7 +9,14 @@ import SwiftUI
 
 struct aboutview: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+            
+            Text("This project was done by Evan Taylor and Jeremiah Perez-Mendez")
+        }
     }
 }
 

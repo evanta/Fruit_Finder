@@ -32,9 +32,8 @@ struct ContentView: View {
                         
                     
                     NavigationLink(destination: gameplayview()) {
-                        Text("Play!")
+                        Image("Play")
                             .padding()
-                            .background(Color.white)
                             .foregroundColor(.black)
                             .font(.title)
                             .cornerRadius(10)
@@ -42,9 +41,9 @@ struct ContentView: View {
                     }
                     
                     NavigationLink(destination: leaderboardview()) {
-                        Text("Leaderboard")
+                        Image("Leaderboard")
                             .padding()
-                            .background(Color.white)
+                            
                             .foregroundColor(.black)
                             .font(.title)
                             .cornerRadius(10)
@@ -52,9 +51,9 @@ struct ContentView: View {
                     }
                     
                     NavigationLink(destination: fruitfactview()) {
-                        Text("Fruit Facts")
+                        Image("FruitFacts")
                             .padding()
-                            .background(Color.white)
+                            
                             .foregroundColor(.black)
                             .font(.title)
                             .cornerRadius(10)
@@ -62,9 +61,9 @@ struct ContentView: View {
                     }
                     
                     NavigationLink(destination: aboutview()) {
-                        Text("About")
+                        Image("About")
                             .padding()
-                            .background(Color.white)
+                            
                             .foregroundColor(.black)
                             .font(.title)
                             .cornerRadius(10)

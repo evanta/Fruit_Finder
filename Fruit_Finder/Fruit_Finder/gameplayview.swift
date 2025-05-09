@@ -116,7 +116,7 @@ struct gameplayview: View {
                     Text("Score: \(ScoreCount)  Misses: \(MissCount)")
                         .font(.headline)
                         .foregroundColor(Color.green)
-                        .background(Color.purple)
+                        .background(Color.clear)
                         .padding()
                     
                     HStack {

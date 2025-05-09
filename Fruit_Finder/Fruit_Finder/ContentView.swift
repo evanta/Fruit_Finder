@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("BackGround")
+                Image("Background")
                     .resizable()
                     .ignoresSafeArea()
                 
@@ -40,7 +40,7 @@ struct ContentView: View {
                             .padding(.bottom, 10)
                     }
                     
-                    NavigationLink(destination: leaderboardview()) {
+                    NavigationLink(destination: LeaderboardView()) {
                         Image("Leaderboard")
                             .padding()
                             

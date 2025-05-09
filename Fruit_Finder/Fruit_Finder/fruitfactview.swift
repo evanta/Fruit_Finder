@@ -92,7 +92,6 @@ struct fruitfactview: View {
                     fruitimage = winner.name
                     await fetchCryptoData()
                 }
-                winner.name = "Banana"
             }
 
         }
@@ -127,7 +126,10 @@ func fetchCryptoData() async {
 
 //do not change this #Preview section. It breaks the preview on xcode.
 //Our Profs code is not directly transferable
-#Preview {
-    fruitfactview()
-        .environmentObject(GameWinner())
+struct fruitfactview_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        fruitfactview()
+            .environmentObject(GameWinner())
+    }
 }

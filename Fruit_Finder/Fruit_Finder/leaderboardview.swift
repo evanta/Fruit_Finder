@@ -7,75 +7,75 @@
 
 import SwiftUI
 
-struct Customers: Decodable {
-    var id:         String
-    var name:       String
-    var address:    String
-    var city:       String
-    var state:      String
-    var zip:        String
+struct LeaderboardEntry: Codable, Identifiable {
+    var id = UUID()
+    var name: String
+    var score: Int
+}
+		
+class LeaderboardManager: ObservableObject {
+    @Published var entries: [LeaderboardEntry] = []
+
+    private let leaderboardKey = "fruitGameLeaderboard"
+
+    init() {
+        loadLeaderboard()
+    }
+
+    func addEntry(name: String, score: Int) {
+        let newEntry = LeaderboardEntry(name: name, score: score)
+        entries.append(newEntry)
+        entries.sort { $0.score > $1.score }  // High score first
+        saveLeaderboard()
+    }
+
+    private func saveLeaderboard() {
+        if let data = try? JSONEncoder().encode(entries) {
+            UserDefaults.standard.set(data, forKey: leaderboardKey)
+        }
+    }
+
+    private func loadLeaderboard() {
+        if let data = UserDefaults.standard.data(forKey: leaderboardKey),
+           let savedEntries = try? JSONDecoder().decode([LeaderboardEntry].self, from: data) {
+            entries = savedEntries
+        }
+    }
+
+    func clearLeaderboard() {
+        entries = []
+        UserDefaults.standard.removeObject(forKey: leaderboardKey)
+    }
 }
 
-struct leaderboardview: View {
-    @State private var customers = [Customers]()
+
+struct LeaderboardView: View {
+    @EnvironmentObject var leaderboardManager: LeaderboardManager
     
     var body: some View {
-        NavigationView {
-            List(customers, id: \.id) { t in
-                VStack (alignment: .leading) {
-                    Text(String(t.id))
-                        .font(.headline)
-                        .foregroundColor(.cyan)
-                    Text(t.name)
-                        .font(.body)
-                        .foregroundColor(.indigo)
-                    Text(String(t.address))
-                        .font(.body)
-                        .foregroundColor(.red)
-                    Text(String(t.city))
-                        .font(.body)
-                        .foregroundColor(.purple)
-                    Text(String(t.state))
-                        .font(.body)
-                        .foregroundColor(.blue)
-                    Text(String(t.zip))
-                        .font(.body)
-                        .foregroundColor(.pink)
+        ZStack{
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+                
+            
+            List(leaderboardManager.entries) { entry in
+                HStack {
+                    Text(entry.name)
+                    Spacer()
+                    Text("\(entry.score)")
                 }
             }
-            .navigationTitle("All Customers")
-            .task {
-                await fetchAllCustomers()
-            }
-        }
-    }
-    
-    func fetchAllCustomers() async {
-        // create the URL
-        guard let url = URL(string: "https://www.dsm.fordham.edu/~jperezmendez/cgi-bin/InfoJSONConvert.py") else {
-            print("Hey Man, THIS URL DOES NOT WORK!")
-            return
+            .background(Color.clear)
+            .scrollContentBackground(.hidden)
+            .navigationTitle("Leaderboard")
         }
         
-        // fetch the data
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            
-            // decode that data
-            if let decodedResponse = try? JSONDecoder().decode([Customers].self, from: data) {
-                customers = decodedResponse
-            }
-        } catch {
-            print("Bad news ... This data is not valid :-(")
-        }
-        
-        // ecode the data
     }
 }
-
 
 struct leaderboardview_Previews: PreviewProvider {
     static var previews: some View {
-        leaderboardview()
+        LeaderboardView()
     }
 }

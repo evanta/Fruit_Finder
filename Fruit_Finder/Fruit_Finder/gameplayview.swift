@@ -27,6 +27,10 @@ struct gameplayview: View {
     @State private var GameOver:Bool = false
     @State private var GameStarted:Bool = false
     @State private var SelectedFruits: [String] = []
+    @State private var showGameOverPopup = false
+    @State private var playerName = ""
+    @EnvironmentObject var leaderboardManager: LeaderboardManager
+
     
     @State private var RandomFruitList:[String] = ["Banana", "Blackberry", "Durian", "Fig", "Gooseberry", "GreenApple", "Kiwi", "Lingonberry", "Lychee", "Orange", "Passionfruit", "Pear", "Persimmon", "Pineapple", "Plum", "Strawberry", "Tomato"]
     
@@ -68,7 +72,7 @@ struct gameplayview: View {
         
         
         ZStack{
-            Image("BackGround")
+            Image("Background")
                 .resizable()
                 .ignoresSafeArea()
             
@@ -141,6 +145,12 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit1)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
                                 }
@@ -169,9 +179,15 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit2)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
-                                
+                                    
                                 }
                             }
                             
@@ -197,10 +213,16 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit3)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
                                 }
-                                }
+                            }
                             
                             
                         }
@@ -225,9 +247,15 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit4)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
-                                
+                                    
                                 }
                             }
                             
@@ -252,6 +280,12 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit5)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
                                 }
@@ -280,6 +314,12 @@ struct gameplayview: View {
                                     
                                 } else{
                                     MissCount += 1
+                                    if MissCount >= 3 {
+                                        GameOver = true
+                                        GameStarted = false
+                                        showGameOverPopup = true
+                                        winner.name = (fruit6)
+                                    }
                                     SelectedFruits.removeAll()
                                     ShuffleFruit()
                                 }
@@ -291,20 +331,38 @@ struct gameplayview: View {
                         Image(fruit6)
                             .resizable()
                             .shadow(radius: 5)
-                        // Enlarge when selected
+                        
                     }
+                            
+                                
+
+                        }
                     }
                     
                 }
                 
             }
+        .alert("Game Over", isPresented: $showGameOverPopup) {
+            TextField("Enter Name", text: $playerName)
+            Button("Submit") {
+                leaderboardManager.addEntry(name: playerName, score: ScoreCount)
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Your score: \(ScoreCount)")
+        }
         }
     }
-}
+    
+
 
 //do not change this #Preview section. It breaks the preview on xcode.
 //Our Profs code is not directly transferable
-#Preview {
-    gameplayview()
-        .environmentObject(GameWinner())
+struct gameplayview_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        gameplayview()
+            .environmentObject(GameWinner())
+            .environmentObject(LeaderboardManager())
+    }
 }

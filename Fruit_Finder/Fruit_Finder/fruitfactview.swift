@@ -33,38 +33,66 @@ struct fruitfactview: View {
     
     var body: some View {
         ZStack {
-            Color(.purple)
-                .ignoresSafeArea()
-            
-            VStack {
-                Image(fruitimage)
-                    .resizable()
-                    .padding()
-                Text(fruit.map {
-                    """
-                    Name: \($0.name)
-                    Family: \($0.family)
-                    Genus: \($0.genus)
-                    Order: \($0.order)
-                    
-                    Nutrition:
-                    - Calories: \($0.nutritions.calories)
-                    - Fat: \($0.nutritions.fat)
-                    - Sugar: \($0.nutritions.sugar)
-                    - Carbohydrates: \($0.nutritions.carbohydrates)
-                    - Protein: \($0.nutritions.protein)
-                    """
-                } ?? "loading...")                    .frame(width: 275, height: 480, alignment: .center)
-                    .background(Color.white)
-                    .foregroundColor(Color.black)
-                    .font(.custom("helvetica", size: 12))
-            }
+                    LinearGradient(gradient: Gradient(colors: [.purple, .indigo]),
+                                   startPoint: .topLeading,
+                                   endPoint: .bottomTrailing)
+                        .ignoresSafeArea()
+
+                    VStack(spacing: 20) {
+                        Image(fruitimage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .shadow(radius: 10)
+                            .padding()
+
+                        if let fruit = fruit {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text(fruit.name)
+                                    .font(.title)
+                                    .bold()
+
+                                Group {
+                                    Text("Family: \(fruit.family)")
+                                    Text("Genus: \(fruit.genus)")
+                                    Text("Order: \(fruit.order)")
+                                }
+                                .font(.subheadline)
+
+                                Divider()
+
+                                Text("Nutrition Facts")
+                                    .font(.headline)
+                                    .padding(.bottom, 4)
+
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("• Calories: \(fruit.nutritions.calories, specifier: "%.1f")")
+                                    Text("• Fat: \(fruit.nutritions.fat, specifier: "%.1f")g")
+                                    Text("• Sugar: \(fruit.nutritions.sugar, specifier: "%.1f")g")
+                                    Text("• Carbohydrates: \(fruit.nutritions.carbohydrates, specifier: "%.1f")g")
+                                    Text("• Protein: \(fruit.nutritions.protein, specifier: "%.1f")g")
+                                }
+                                .font(.footnote)
+                            }
+                            .padding()
+                            .frame(maxWidth: 300)
+                            .background(Color.white)
+                            .cornerRadius(16)
+                            .shadow(radius: 8)
+                            .foregroundColor(.black)
+                        } else {
+                            ProgressView("Loading fruit data...")
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        }
+                    }
+
             .task(id: winner.name) {
                 if !winner.name.isEmpty {
                     fruitimage = winner.name
                     await fetchCryptoData()
                 }
-                //winner.name = "Banana"
+                winner.name = "Banana"
             }
 
         }
